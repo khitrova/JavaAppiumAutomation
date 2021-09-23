@@ -146,6 +146,47 @@ public class FirstTest {
             5);
 
   }
+
+  @Test
+  public void testCancelSearchWithResults(){
+
+    waitForElementAndClick(
+            By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+            "Cannot find Search Wikipedia input",
+            5
+    );
+
+    waitForElementAndSendKeys(
+            By.xpath("//*[contains(@text,'Search…')]"),
+            "Java",
+            "Cannot find search input",
+            5
+    );
+
+    Assert.assertTrue(
+            "Not enough elements found",
+            checkAmount(
+                    By.id("org.wikipedia:id/page_list_item_container"),
+                    1,
+                    "No search results",
+                    5
+            )
+    );
+
+    waitForElementAndClick(
+            By.id("org.wikipedia:id/search_close_btn"),
+            "Cannot find X to cancel search",
+            5
+    );
+
+    waitForElementNotPresent(
+            By.id("org.wikipedia:id/page_list_item_container"),
+            "Search results are still present on the page",
+            5
+    );
+    }
+
+
   private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds){
 
     WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
@@ -199,5 +240,11 @@ public class FirstTest {
                     expected_text)
     );
 
+  }
+
+  private boolean checkAmount(By by, int min_value,String error_message, long timeoutInSeconds){
+   waitForElementPresent(by,error_message,timeoutInSeconds);
+   int amount = driver.findElements(by).size();
+   return (amount>min_value);
   }
 }
