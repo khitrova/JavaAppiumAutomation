@@ -337,6 +337,12 @@ public class FirstTest {
             5
     );
 
+    waitForElementPresent(
+            By.id("org.wikipedia:id/menu_sort_options"),
+            "error menu",
+            10
+    );
+
     waitForElementAndClick(
             By.xpath("//*[contains(@text,'"+nameOfFolder+"')]"),
             "Cannot find created folder",
@@ -558,7 +564,7 @@ public class FirstTest {
     );
 
     waitForElementAndClick(
-            By.xpath("//*[contains(@text,'"+nameOfFolder+"')]"),
+            By.xpath("//android.widget.TextView[@text='"+nameOfFolder+"']"),
             "Cannot find created folder",
             5
     );
@@ -581,6 +587,12 @@ public class FirstTest {
             By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"),
             "Cannot find 'My lists' button ",
             5
+    );
+
+    waitForElementPresent(
+            By.id("org.wikipedia:id/menu_sort_options"),
+            "Menu element not present",
+            10
     );
 
     waitForElementAndClick(
