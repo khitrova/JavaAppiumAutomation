@@ -91,4 +91,28 @@ public class SearchTests extends CoreTestCase {
             "Not all elements contains keyword " + keyword,
             searchPageObject.assertResultsContainKeyword(keyword));
   }
+
+  @Test
+  public void testresultsTitleAndDescription(){
+    String keyword = "String",
+            firstTitle = "String",
+            firstDescription = "Wikimedia disambiguation page",
+            secondTitle = "String theory",
+            secondDescription = "A fundamental theory of physics",
+            thirdTitle = "String instrument",
+            thirdDescription ="Musical instrument that generates tones by one or more strings stretched between two points";
+
+    SearchPageObject searchPageObject = new SearchPageObject(driver);
+    searchPageObject.initSearchInput();
+    searchPageObject.typeSearchLine(keyword);
+    int amountOfSearchElements =searchPageObject.getAmountOfFoundArticles();
+    assertTrue(
+            "Found too few results",
+            amountOfSearchElements>=3
+    );
+    searchPageObject.waitForElementByTitleAndDescription(firstTitle,firstDescription);
+    searchPageObject.waitForElementByTitleAndDescription(secondTitle,secondDescription);
+    searchPageObject.waitForElementByTitleAndDescription(thirdTitle,thirdDescription);
+
+  }
 }

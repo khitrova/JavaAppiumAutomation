@@ -12,6 +12,7 @@ public class SearchPageObject extends MainPageObject {
             SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
             SEARCH_RESULT_ELEMENT = "org.wikipedia:id/page_list_item_container",
             SEARCH_RESULT_LIST_ELEMENT = "org.wikipedia:id/page_list_item_title",
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION = "//android.widget.TextView[@text='{DESCRIPTION}']/../android.widget.TextView[@text='{TITLE}']",
             SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results found']";
 
 
@@ -23,7 +24,14 @@ public class SearchPageObject extends MainPageObject {
   private static String getResultSearchElement(String substring){
     return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}",substring);
   }
-  //Templates methods
+
+  private static String getResultSearchElement(String title, String description){
+    String editedTitle = SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION.replace("{TITLE}",title);
+    return editedTitle.replace("{DESCRIPTION}",description);
+  }
+
+//Templates methods
+
   public void initSearchInput(){
     this.waitForElementPresent(By.xpath(SEARCH_INIT_ELEMENT), "Cannot find search input");
     this.waitForElementAndClick(By.xpath(SEARCH_INIT_ELEMENT), "Cannot find and click search init element", 5);
@@ -106,4 +114,13 @@ public class SearchPageObject extends MainPageObject {
                     keyword
     );
   }
+  public void waitForElementByTitleAndDescription(String title, String description){
+
+    String searchResultXpath = getResultSearchElement(title,description);
+    this.waitForElementPresent(
+            By.xpath(searchResultXpath),
+            "Result has wrong title or description compared to "+title+" and "+description,
+            5);
+  }
+
 }
