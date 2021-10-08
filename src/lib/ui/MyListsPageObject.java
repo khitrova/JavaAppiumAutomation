@@ -7,7 +7,7 @@ public class MyListsPageObject extends MainPageObject{
 
   private static final String
   MENU_SORT_ELEMENTS = "org.wikipedia:id/menu_sort_options",
-  FOLDER_BY_NAME_TPL = "//*[@resource-id='org.wikipedia:id/item_title']//*[@text='{TITLE}']",
+  FOLDER_BY_NAME_TPL = "//android.widget.TextView[@text='{FOLDER_NAME}']",
   ARTICLE_BY_TITLE_TPL = "//*[@text='{TITLE}']";
 
   public MyListsPageObject(AppiumDriver driver) {
@@ -15,14 +15,15 @@ public class MyListsPageObject extends MainPageObject{
   }
 
   private static String getFolderXpathByName(String nameOfFolder){
-    return FOLDER_BY_NAME_TPL.replace("FOLDER_NAME",nameOfFolder);
+    return FOLDER_BY_NAME_TPL.replace("{FOLDER_NAME}",nameOfFolder);
   }
 
   private static String getSavedArticleXpathByTitle(String articleTitle){
-    return ARTICLE_BY_TITLE_TPL.replace("TITLE",articleTitle);
+    return ARTICLE_BY_TITLE_TPL.replace("{TITLE}",articleTitle);
   }
 
   public void openFolderByName(String nameOfFolder){
+    //check to avoid mis click
     this.waitForElementPresent(
             By.id(MENU_SORT_ELEMENTS),
             "Cannot not find sort menu element",
@@ -31,7 +32,7 @@ public class MyListsPageObject extends MainPageObject{
 
     String folderNameXpath = getFolderXpathByName(nameOfFolder);
     this.waitForElementAndClick(
-            By.xpath(folderNameXpath),
+             By.xpath(folderNameXpath),
             "Cannot find folder by name "+nameOfFolder,
             5
     );
