@@ -56,7 +56,6 @@ public class MyListsPageObject extends MainPageObject{
             "Cannot find saved article "+ articleTitle,
             15
     );
-
   }
 
   public void waitForArticleToDisappearByTitle(String articleTitle){
@@ -67,6 +66,14 @@ public class MyListsPageObject extends MainPageObject{
             "Saved article still present with title "+ articleTitle,
             15
     );
+  }
 
+  public void openSavedArticle(String articleTitle){
+    String articleXpath = getSavedArticleXpathByTitle(articleTitle);
+    this.waitForElementAndClick(
+            By.xpath(articleXpath),
+            "Cannot find saved article",
+            5
+    );
   }
 }

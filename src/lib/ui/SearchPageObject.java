@@ -11,6 +11,7 @@ public class SearchPageObject extends MainPageObject {
             SEARCH_CANCEL_BUTTON = "org.wikipedia:id/search_close_btn",
             SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
             SEARCH_RESULT_ELEMENT = "org.wikipedia:id/page_list_item_container",
+            SEARCH_RESULT_LIST_ELEMENT = "org.wikipedia:id/page_list_item_title",
             SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results found']";
 
 
@@ -75,5 +76,34 @@ public class SearchPageObject extends MainPageObject {
 
   public void assertThereIsNoResultOfSearch(){
     this.assertElementNotPresent(By.xpath(SEARCH_RESULT_ELEMENT),"We suppose not to find any results");
+  }
+
+  public void assertSearchElementHasText(String expected){
+    this.assertElementHasText(
+            this.waitForElementPresent(
+                    By.xpath(SEARCH_INIT_ELEMENT),
+                    "Cannot find 'Search Wikipedia' input",
+                    5
+            ),
+            expected,
+            "Can't find text "+ expected,
+            5
+    );
+  }
+
+  public void assertSearchResultsAbsent(){
+    this.waitForElementNotPresent(
+            By.id(SEARCH_RESULT_ELEMENT),
+            "Search results are still present on the page",
+            5
+    );
+  }
+
+  public boolean assertResultsContainKeyword(String keyword) {
+    return this.checkListElementsContainsString(
+                    By.id(SEARCH_RESULT_ELEMENT),
+                    By.id(SEARCH_RESULT_LIST_ELEMENT),
+                    keyword
+    );
   }
 }
