@@ -8,13 +8,13 @@ public class ArticlePageObject extends MainPageObject{
   private static final String
           TITLE = "id:org.wikipedia:id/view_page_title_text",
           FOOTER_ELEMENT = "xpath://*[@text='View page in browser']",
-          OPTIONS_BUTTON = "xpath://android.widget.ImageView[@content-desc='More options']",
-          OPTIONS_ADD_TO_MY_LIST_BUTTON = "xpath:/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[3]/android.widget.RelativeLayout/android.widget.TextView",
+          OPTIONS_BUTTON = "xpath://lib.ui.android.widget.ImageView[@content-desc='More options']",
+          OPTIONS_ADD_TO_MY_LIST_BUTTON = "xpath:/hierarchy/lib.ui.android.widget.FrameLayout/lib.ui.android.widget.FrameLayout/lib.ui.android.widget.ListView/lib.ui.android.widget.LinearLayout[3]/lib.ui.android.widget.RelativeLayout/lib.ui.android.widget.TextView",
           ADD_TO_MY_LIST_OVERLAY = "id:org.wikipedia:id/onboarding_button",
           MY_LIST_NAME_INPUT ="id:org.wikipedia:id/text_input",
-          MY_LIST_OK_BUTTON = "id:android:id/button1",
-          MY_LIST_NAME_TPL = "xpath://android.widget.TextView[@text='{LIST_NAME}']",
-          CLOSE_ARTICLE_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']";
+          MY_LIST_OK_BUTTON = "id:lib.ui.android:id/button1",
+          MY_LIST_NAME_TPL = "xpath://lib.ui.android.widget.TextView[@text='{LIST_NAME}']",
+          CLOSE_ARTICLE_BUTTON = "xpath://lib.ui.android.widget.ImageButton[@content-desc='Navigate up']";
 
   private static String getListXpathByName(String nameOfFolder){
     return MY_LIST_NAME_TPL.replace("{LIST_NAME}",nameOfFolder);
