@@ -3,18 +3,19 @@ package lib.ui;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 
-public class ArticlePageObject extends MainPageObject{
+abstract public class ArticlePageObject extends MainPageObject{
 
-  private static final String
-          TITLE = "id:org.wikipedia:id/view_page_title_text",
-          FOOTER_ELEMENT = "xpath://*[@text='View page in browser']",
-          OPTIONS_BUTTON = "xpath://lib.ui.android.widget.ImageView[@content-desc='More options']",
-          OPTIONS_ADD_TO_MY_LIST_BUTTON = "xpath:/hierarchy/lib.ui.android.widget.FrameLayout/lib.ui.android.widget.FrameLayout/lib.ui.android.widget.ListView/lib.ui.android.widget.LinearLayout[3]/lib.ui.android.widget.RelativeLayout/lib.ui.android.widget.TextView",
-          ADD_TO_MY_LIST_OVERLAY = "id:org.wikipedia:id/onboarding_button",
-          MY_LIST_NAME_INPUT ="id:org.wikipedia:id/text_input",
-          MY_LIST_OK_BUTTON = "id:lib.ui.android:id/button1",
-          MY_LIST_NAME_TPL = "xpath://lib.ui.android.widget.TextView[@text='{LIST_NAME}']",
-          CLOSE_ARTICLE_BUTTON = "xpath://lib.ui.android.widget.ImageButton[@content-desc='Navigate up']";
+  protected static String
+    TITLE,
+    FOOTER_ELEMENT,
+    OPTIONS_BUTTON,
+    OPTIONS_ADD_TO_MY_LIST_BUTTON ,
+    ADD_TO_MY_LIST_OVERLAY,
+    MY_LIST_NAME_INPUT,
+    MY_LIST_OK_BUTTON,
+    MY_LIST_NAME_TPL,
+    CLOSE_ARTICLE_BUTTON;
+
 
   private static String getListXpathByName(String nameOfFolder){
     return MY_LIST_NAME_TPL.replace("{LIST_NAME}",nameOfFolder);

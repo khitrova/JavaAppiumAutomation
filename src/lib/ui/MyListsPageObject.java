@@ -2,12 +2,12 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 
-public class MyListsPageObject extends MainPageObject{
+abstract public class MyListsPageObject extends MainPageObject{
 
-  private static final String
-  MENU_SORT_ELEMENTS = "id:org.wikipedia:id/menu_sort_options",
-  FOLDER_BY_NAME_TPL = "xpath://lib.ui.android.widget.TextView[@text='{FOLDER_NAME}']",
-  ARTICLE_BY_TITLE_TPL = "xpath://*[@text='{TITLE}']";
+  protected static  String
+  MENU_SORT_ELEMENTS,
+  FOLDER_BY_NAME_TPL,
+  ARTICLE_BY_TITLE_TPL;
 
   public MyListsPageObject(AppiumDriver driver) {
     super(driver);
